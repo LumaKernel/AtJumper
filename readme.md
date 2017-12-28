@@ -7,7 +7,7 @@ AtCoderでbeta版から旧版へ、旧版からbeta版へ全てのページに
 
 TampermonkeyかGreasemonkeyという拡張をお使いのchromeやfirefoxやらに入れて、
 
-[準備中()
+[https://lumakernel.github.io/AtJumper/atjumper.user.js](https://lumakernel.github.io/AtJumper/atjumper.user.js)
 
 上記リンクへアクセス、インストールするか聞かれるので入れればおしまい！
 
