@@ -13,9 +13,9 @@ TampermonkeyかGreasemonkeyという拡張をお使いのchromeやfirefoxやら�
 
 # スクリーンショット
 
-![トップページでの表表示例](https://lumakernel.github.io/AtJumper/img/screen1.jpg "トップページでの表表示例")
+![トップページでの表示例](https://lumakernel.github.io/AtJumper/img/screen1.png "トップページでの表示例")
 
-![クリスマスコンテスト-English](https://lumakernel.github.io/AtJumper/img/screen2.jpg "クリスマスコンテスト-English")
+![クリスマスコンテスト-English](https://lumakernel.github.io/AtJumper/img/screen2.png "クリスマスコンテスト-English")
 
 言語判定たいへん！
 
