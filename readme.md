@@ -11,7 +11,18 @@ TampermonkeyかGreasemonkeyという拡張をお使いのchromeやfirefoxやら�
 
 上記リンクへアクセス、インストールするか聞かれるので入れればおしまい！
 
+# スクリーンショット
+
+![トップページでの表表示例](https://lumakernel.github.io/AtJumper/img/screen1.jpg "トップページでの表表示例")
+
+![クリスマスコンテスト-English](https://lumakernel.github.io/AtJumper/img/screen2.jpg "クリスマスコンテスト-English")
+
+言語判定たいへん！
+
 ---
 
-うまく働かないページがあれば製作者[@lumc_](https://twitter.com/lumc_)までお声掛けいただければ幸いです！
+うまく働かないページがあれば製作者[@lumc\_](https://twitter.com/lumc_)までお声掛けいただければ幸いです！
+
+最後に、AtCoderなしでは成り立たないUserScriptです！
+AtCoderありがとう！
 
