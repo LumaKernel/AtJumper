@@ -9,6 +9,11 @@
 // @include      https://beta.atcoder.jp/*
 // ==/UserScript==
 
+/*
+v1.1 更新のお知らせ
+バグ修正など.
+*/
+
 // 404でないページを前提しています
 
 /* global $, LANG */
