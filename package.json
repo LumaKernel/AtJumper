@@ -1,0 +1,28 @@
+{
+  "name": "AtJumper",
+  "version": "1.0.0",
+  "description": "最新ver : 1.0",
+  "main": "atjumper.user.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LumaKernel/AtJumper.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/LumaKernel/AtJumper/issues"
+  },
+  "homepage": "https://github.com/LumaKernel/AtJumper#readme",
+  "devDependencies": {
+    "eslint-config-standard": "^11.0.0",
+    "eslint-plugin-import": "^2.12.0",
+    "eslint-plugin-node": "^6.0.1",
+    "eslint-plugin-promise": "^3.8.0",
+    "eslint-plugin-standard": "^3.1.0",
+    "prettier-eslint-cli": "^4.7.1"
+  }
+}
