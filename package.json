@@ -1,7 +1,7 @@
 {
   "name": "AtJumper",
-  "version": "1.0.0",
-  "description": "最新ver : 1.0",
+  "version": "2.0.0",
+  "description": "jump AtCoder between old and new",
   "main": "atjumper.user.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
