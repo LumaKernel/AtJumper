@@ -1,17 +1,18 @@
 // ==UserScript==
 // @name         AtJumper
 // @namespace    https://twitter.com/lumc_
-// @version      1.1
-// @description  Jump AtCoder between beta and legacy
+// @version      2.0
+// @description  Jump AtCoder between old and new
 // @author       Luma
-// @include      http://*atcoder.jp/*
-// @include      https://*atcoder.jp/*
-// @include      https://beta.atcoder.jp/*
+// @include      https://*contest.atcoder.jp/*
+// @include      https://atcoder.jp/contests/*
 // ==/UserScript==
 
 /*
-v1.1 更新のお知らせ
-バグ修正など.
+
+旧版 :
+*.constest.atcoder.jp/~ のみ
+
 */
 
 // 404でないページを前提しています
@@ -22,9 +23,9 @@ v1.1 更新のお知らせ
   'use strict'
   const host = location.host
   const pathname = location.pathname
-  const isBeta = !!host.match(/.*beta\.atcoder\.jp$/)
+  const isNew = !host.match(/.*\.contest\.atcoder\.jp$/)
   const isTop = host === 'atcoder.jp'
-  const existNav = isBeta ? false : $('.nav').attr('id') !== 'nav-right-logined'
+  const existNav = isNew ? false : $('.nav').attr('id') !== 'nav-right-logined'
   const TASKS = 'tasks'
   const ASSIGHNMENTS = 'assignments'
 
@@ -40,7 +41,10 @@ v1.1 更新のお知らせ
     'contest'
   ]
 
-  const isNotNIHONGO = isBeta
+  const JumpToOld = { ja: '旧版へ', en: 'Jump to old version' }
+  const JumpToNew = { ja: '新版へ', en: 'Jump to new version' }
+
+  const isNotNIHONGO = isNew
     ? LANG !== 'ja'
     : isTop
       ? !$('a.dropdown-toggle')
@@ -53,23 +57,25 @@ v1.1 更新のお知らせ
 
   if (!existNav) makeNav()
 
-  if (isBeta) {
-    const label = isNotNIHONGO ? 'jump to Legacy' : 'Legacyへ'
-    const $button = $(`<li><a href="${makeLegacyURL()}">${label}</a></li>`)
-    $nav.append($button)
+  if (isNew) {
+    if (isJumpableToOld()) {
+      const label = isNotNIHONGO ? JumpToOld.en : JumpToOld.ja
+      const $button = $(`<li><a href="${makeOldURL()}">${label}</a></li>`)
+      $nav.append($button)
+    }
   } else {
     let buttonStr
     if (isTop) {
-      buttonStr = `<span>${isNotNIHONGO ? 'jump to Beta' : 'Betaへ'}</span>`
+      buttonStr = `<span>${isNotNIHONGO ? JumpToNew.en : JumpToNew.ja}</span>`
     } else {
       buttonStr = `<span class="lang-en lang-child ${
         !isNotNIHONGO ? 'hidden-lang' : ''
       }">jump to Beta</span>
-        <span class="lang-ja lang-child ${
-  isNotNIHONGO ? 'hidden-lang' : ''
-  }">Betaへ</span>`
+        <span class="lang-ja lang-child ${isNotNIHONGO ? 'hidden-lang' : ''}">${
+    JumpToNew.ja
+  }</span>`
     }
-    const $button = $(`<li><a href="${makeBetaURL()}">
+    const $button = $(`<li><a href="${makeNewURL()}">
       <span class="lang lang-selected">
       ${buttonStr}
       </span>
@@ -78,24 +84,16 @@ v1.1 更新のお知らせ
   }
 
   // assignments -> tasks
-  function makeBetaURL () {
-    const { paths } = transformToBeta({
+  function makeNewURL () {
+    const { paths } = transformToNew({
       hosts: host.split('.'),
       paths: pathname.split('/')
     })
-    return 'https://beta.atcoder.jp/' + paths.join('/')
+    return 'https://atcoder.jp/' + paths.join('/')
   }
 
-  function transformToBeta ({ hosts, paths }) {
+  function transformToNew ({ hosts, paths }) {
     paths = paths.filter(el => el !== '')
-    if (paths[0] === 'user') {
-      paths[0] = 'users'
-      return { paths }
-    }
-    if (paths[0] === 'settings' || paths[0] === 'users') {
-      return { paths }
-    }
-
     if (paths[0] === 'submissions' && paths[1] === 'all') {
       paths = ['submissions']
     }
@@ -104,8 +102,9 @@ v1.1 更新のお知らせ
       paths.shift()
     }
 
-    hosts.length -= Math.min(hosts.length, 2)
+    hosts.length -= Math.min(hosts.length, 2) // atcoder jp を削除
     hosts.reverse()
+    // hosts = ["constest", <contest-id>] になっているはず
     if (hosts[0]) hosts[0] += 's'
     //
     if (paths[0] === ASSIGHNMENTS) paths[0] = TASKS
@@ -116,8 +115,8 @@ v1.1 更新のお知らせ
 
   // tasks -> assignments
   // tasks/* -> tasks/*
-  function makeLegacyURL () {
-    const { paths, hosts } = transformToLegacy({
+  function makeOldURL () {
+    const { paths, hosts } = transformToOld({
       paths: pathname.split('/')
     })
     return `http://${hosts.map(el => el + '.').join('')}atcoder.jp/${paths.join(
@@ -125,17 +124,15 @@ v1.1 更新のお知らせ
     )}`
   }
 
-  function transformToLegacy ({ paths }) {
+  function isJumpableToOld () {
+    const paths = pathname.split('/').filter(e => e)
+    if (paths.length <= 1) return false
+    if (paths[1] === 'archive') return false
+    return true
+  }
+
+  function transformToOld ({ paths }) {
     paths = paths.filter(el => el !== '')
-    if (paths[0] === 'users') {
-      paths[0] = 'user'
-      return { hosts: [], paths }
-    }
-    if (paths[0] === 'settings') {
-      // えーiconが存在しないため (gravatarなので)
-      if (paths[1] === 'icon') paths.pop()
-      return { hosts: ['practice', 'contest'], paths }
-    }
 
     if (
       paths[0] === 'contests' &&
@@ -157,7 +154,7 @@ v1.1 更新のお知らせ
   }
 
   function makeNav () {
-    if (isBeta) {
+    if (isNew) {
       $nav = $(`<ul class="nav navbar-nav">`)
       $('.navbar-right')
         .eq(0)
@@ -196,7 +193,7 @@ v1.1 更新のお知らせ
     }
     return ret
   }
-  // for Legacy, not TopPage
+  // for Old, not TopPage
   function getLang () {
     /* eslint camelcase: "off" */
     let browser_language = browserLanguage()
