@@ -1,5 +1,5 @@
 # AtJumper
-最新ver : 2.0
+最新ver : 2.1
 
 AtCoderで新版から旧版へ, 旧版から新版へ全てのページ (行き先が存在するページのみ) に  
 それぞれへのリンクを埋め込むUserScriptです
@@ -19,6 +19,10 @@ TampermonkeyかGreasemonkeyという拡張をお使いのchromeやfirefoxやら�
 ![TDPCでの新板での表示例](https://lumakernel.github.io/AtJumper/img/screen4.png "TDPCでの新板での表示例")
 
 ## Changing log
+
+2019/02/13  
+v2.1  
+旧版の個別のsubmissionページへの移動がうまくいっていなかったので修正
 
 2019/02/12  
 v2.0  

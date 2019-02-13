@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         AtJumper
 // @namespace    https://twitter.com/lumc_
-// @version      2.0
+// @version      2.1
 // @description  Jump AtCoder between old and new
 // @author       Luma
 // @include      https://*contest.atcoder.jp/*
