@@ -137,9 +137,9 @@
     if (
       paths[0] === 'contests' &&
       paths[2] === 'submissions' &&
-      paths[3] !== 'me'
+      paths.length === 3
     ) {
-      paths[3] = 'all'
+      paths.push('all')
     }
 
     const hosts = [].concat(paths)
